@@ -1,0 +1,54 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "fea78131-0192-435d-bfbb-0790e870c7ad",
+  "name": "hide override",
+  "description": "The HideOverride function.",
+  "language": "C#",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Enable": {
+        "type": "boolean",
+        "default": true
+      }
+    }
+  },
+  "overrides": {
+    "Hidable Override": {
+      "$hyparShowIf": {
+        "conditions": [
+          {
+            "property": "Enable",
+            "value": true
+          }
+        ]
+      },
+      "deprecated": true,
+      "context": "[*discriminator=Elements.Box]",
+      "identity": {
+        "Add Id": {
+          "type": "string"
+        }
+      },
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Point": {
+              "$ref": "https://schemas.hypar.io/Vector3.json"
+            }
+          }
+        },
+        "remove": true
+      },
+      "schema": {
+        "Transform": {
+          "$ref": "https://schemas.hypar.io/Transform.json"
+        }
+      }
+    }
+  },
+  "outputs": [],
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "1.11.0-alpha.18"
+}
