@@ -7,7 +7,7 @@
   "input_schema": {
     "type": "object",
     "properties": {
-      "Enable": {
+      "Enable Hideable Override": {
         "type": "boolean",
         "default": true
       }
@@ -18,12 +18,11 @@
       "$hyparShowIf": {
         "conditions": [
           {
-            "property": "Enable",
+            "property": "Enable Hideable Override",
             "value": true
           }
         ]
       },
-      "deprecated": true,
       "context": "[*discriminator=Elements.Box]",
       "identity": {
         "Add Id": {
@@ -43,6 +42,97 @@
       "schema": {
         "Transform": {
           "$ref": "https://schemas.hypar.io/Transform.json"
+        }
+      }
+    },
+    "An Override": {
+      "context": "[*discriminator=Elements.OtherBox]",
+      "identity": {
+        "Add Id": {
+          "type": "string"
+        }
+      },
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Point": {
+              "$ref": "https://schemas.hypar.io/Vector3.json"
+            }
+          }
+        },
+        "remove": true
+      },
+      "schema": {
+        "Transform": {
+          "$ref": "https://schemas.hypar.io/Transform.json"
+        },
+        "Enable Number Override": {
+          "type": "boolean"
+        },
+        "Number": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "$hyparShowIf": {
+            "conditions": [
+              {
+                "property": "Enable Number Override",
+                "value": true
+              }
+            ]
+          }
+        },
+        "Special Number If 1 or 3": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "$hyparShowIf": {
+            "type": "any",
+            "conditions": [
+              {
+                "property": "Number",
+                "value": 1
+              },
+              {
+                "property": "Number",
+                "value": 3
+              }
+            ]
+          }
+        },
+        "Special Number If 2": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "$hyparShowIf": {
+            "conditions": [
+              {
+                "property": "Number",
+                "value": 2
+              }
+            ]
+          }
+        },
+        "Special Number If 0 and 0": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "$hyparShowIf": {
+            "conditions": [
+              {
+                "property": "Special Number If 1 or 3",
+                "value": 0
+              },
+              {
+                "property": "Special Number If 2",
+                "value": 0
+              }
+            ]
+          }
         }
       }
     }

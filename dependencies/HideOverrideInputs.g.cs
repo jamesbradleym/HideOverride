@@ -29,16 +29,16 @@ namespace HideOverride
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public HideOverrideInputs(bool @enable, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public HideOverrideInputs(bool @enableHideableOverride, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<HideOverrideInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @enable, @overrides});
+                validator.PreConstruct(new object[]{ @enableHideableOverride, @overrides});
             }
         
-            this.Enable = @enable;
+            this.EnableHideableOverride = @enableHideableOverride;
             this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
@@ -47,8 +47,8 @@ namespace HideOverride
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Enable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Enable { get; set; } = true;
+        [Newtonsoft.Json.JsonProperty("Enable Hideable Override", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EnableHideableOverride { get; set; } = true;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
@@ -63,17 +63,18 @@ namespace HideOverride
         public Overrides() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(OverrideAdditions @additions, OverrideRemovals @removals, IList<HidableOverrideOverride> @hidableOverride)
+        public Overrides(OverrideAdditions @additions, OverrideRemovals @removals, IList<HidableOverrideOverride> @hidableOverride, IList<AnOverrideOverride> @anOverride)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @additions, @removals, @hidableOverride});
+                validator.PreConstruct(new object[]{ @additions, @removals, @hidableOverride, @anOverride});
             }
         
             this.Additions = @additions ?? this.Additions;
             this.Removals = @removals ?? this.Removals;
             this.HidableOverride = @hidableOverride ?? this.HidableOverride;
+            this.AnOverride = @anOverride ?? this.AnOverride;
         
             if(validator != null)
             {
@@ -90,6 +91,9 @@ namespace HideOverride
         [Newtonsoft.Json.JsonProperty("Hidable Override", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<HidableOverrideOverride> HidableOverride { get; set; } = new List<HidableOverrideOverride>();
     
+        [Newtonsoft.Json.JsonProperty("An Override", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<AnOverrideOverride> AnOverride { get; set; } = new List<AnOverrideOverride>();
+    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
@@ -100,15 +104,16 @@ namespace HideOverride
         public OverrideAdditions() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public OverrideAdditions(IList<HidableOverrideOverrideAddition> @hidableOverride)
+        public OverrideAdditions(IList<HidableOverrideOverrideAddition> @hidableOverride, IList<AnOverrideOverrideAddition> @anOverride)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OverrideAdditions>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @hidableOverride});
+                validator.PreConstruct(new object[]{ @hidableOverride, @anOverride});
             }
         
             this.HidableOverride = @hidableOverride ?? this.HidableOverride;
+            this.AnOverride = @anOverride ?? this.AnOverride;
         
             if(validator != null)
             {
@@ -118,6 +123,9 @@ namespace HideOverride
     
         [Newtonsoft.Json.JsonProperty("Hidable Override", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<HidableOverrideOverrideAddition> HidableOverride { get; set; } = new List<HidableOverrideOverrideAddition>();
+    
+        [Newtonsoft.Json.JsonProperty("An Override", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<AnOverrideOverrideAddition> AnOverride { get; set; } = new List<AnOverrideOverrideAddition>();
     
     }
     
@@ -129,15 +137,16 @@ namespace HideOverride
         public OverrideRemovals() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public OverrideRemovals(IList<HidableOverrideOverrideRemoval> @hidableOverride)
+        public OverrideRemovals(IList<HidableOverrideOverrideRemoval> @hidableOverride, IList<AnOverrideOverrideRemoval> @anOverride)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OverrideRemovals>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @hidableOverride});
+                validator.PreConstruct(new object[]{ @hidableOverride, @anOverride});
             }
         
             this.HidableOverride = @hidableOverride ?? this.HidableOverride;
+            this.AnOverride = @anOverride ?? this.AnOverride;
         
             if(validator != null)
             {
@@ -147,6 +156,9 @@ namespace HideOverride
     
         [Newtonsoft.Json.JsonProperty("Hidable Override", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<HidableOverrideOverrideRemoval> HidableOverride { get; set; } = new List<HidableOverrideOverrideRemoval>();
+    
+        [Newtonsoft.Json.JsonProperty("An Override", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<AnOverrideOverrideRemoval> AnOverride { get; set; } = new List<AnOverrideOverrideRemoval>();
     
     }
     
@@ -187,6 +199,41 @@ namespace HideOverride
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
+    public partial class AnOverrideOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public AnOverrideOverride(string @id, AnOverrideIdentity @identity, AnOverrideValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<AnOverrideOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AnOverrideIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AnOverrideValue Value { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
     public partial class HidableOverrideOverrideAddition 
     
     {
@@ -222,6 +269,41 @@ namespace HideOverride
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
+    public partial class AnOverrideOverrideAddition 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public AnOverrideOverrideAddition(string @id, AnOverrideIdentity @identity, AnOverrideOverrideAdditionValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<AnOverrideOverrideAddition>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity ?? this.Identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AnOverrideIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AnOverrideOverrideAdditionValue Value { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
     public partial class HidableOverrideOverrideRemoval 
     
     {
@@ -248,6 +330,37 @@ namespace HideOverride
     
         [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public HidableOverrideIdentity Identity { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class AnOverrideOverrideRemoval 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public AnOverrideOverrideRemoval(string @id, AnOverrideIdentity @identity)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<AnOverrideOverrideRemoval>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AnOverrideIdentity Identity { get; set; }
     
     }
     
@@ -307,6 +420,80 @@ namespace HideOverride
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
+    public partial class AnOverrideIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public AnOverrideIdentity(string @addId)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<AnOverrideIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @addId});
+            }
+        
+            this.AddId = @addId;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class AnOverrideValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public AnOverrideValue(Transform @transform, bool @enableNumberOverride, double? @number, double? @specialNumberIf1Or3, double? @specialNumberIf2, double? @specialNumberIf0And0)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<AnOverrideValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @transform, @enableNumberOverride, @number, @specialNumberIf1Or3, @specialNumberIf2, @specialNumberIf0And0});
+            }
+        
+            this.Transform = @transform;
+            this.EnableNumberOverride = @enableNumberOverride;
+            this.Number = @number;
+            this.SpecialNumberIf1Or3 = @specialNumberIf1Or3;
+            this.SpecialNumberIf2 = @specialNumberIf2;
+            this.SpecialNumberIf0And0 = @specialNumberIf0And0;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Transform Transform { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Enable Number Override", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EnableNumberOverride { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Number { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Special Number If 1 or 3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SpecialNumberIf1Or3 { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Special Number If 2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SpecialNumberIf2 { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Special Number If 0 and 0", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SpecialNumberIf0And0 { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
     public partial class HidableOverrideOverrideAdditionValue 
     
     {
@@ -314,6 +501,33 @@ namespace HideOverride
         public HidableOverrideOverrideAdditionValue(Vector3 @point)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<HidableOverrideOverrideAdditionValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @point});
+            }
+        
+            this.Point = @point;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Point", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 Point { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class AnOverrideOverrideAdditionValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public AnOverrideOverrideAdditionValue(Vector3 @point)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<AnOverrideOverrideAdditionValue>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @point});

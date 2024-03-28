@@ -6,7 +6,7 @@ The HideOverride function.
 
 |Input Name|Type|Description|
 |---|---|---|
-|Enable|boolean||
+|Enable Hideable Override|boolean||
 
 
 <br>

@@ -25,7 +25,16 @@ namespace HideOverride
               (box, edit) => box.Update(edit)
             );
 
+            var moreBoxes = input.Overrides.AnOverride.CreateElements(
+              input.Overrides.Additions.AnOverride,
+              input.Overrides.Removals.AnOverride,
+              (add) => new Elements.OtherBox(add),
+              (box, identity) => box.Match(identity),
+              (box, edit) => box.Update(edit)
+            );
+
             output.Model.AddElements(boxes);
+            output.Model.AddElements(moreBoxes);
             return output;
         }
     }
